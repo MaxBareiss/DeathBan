@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Logger;
 
 //import org.bukkit.Bukkit;
@@ -45,16 +46,23 @@ public class JoinListener implements Listener{
 		//event.getPlayer();
 		//Player player = (Player)event.getEntity()	
 		//Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + player.getName()); 
-		PreparedStatement ps;
+		
 		try {
+			Statement stmt = null;
+			ResultSet rs = null;
+			PreparedStatement ps;
 			//ps = connection.prepareStatement("SELECT COUNT(*) FROM Deaths WHERE id = (SELECT id FROM Players WHERE username="+event.getPlayer().getDisplayName()+")");
 			
 			//ResultSet rs = ps.executeQuery();
 			//log.info(new Integer(rs.getInt(0)).toString());
 			ps = connection.prepareStatement("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
 			log.info("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
-			ResultSet rs = ps.executeQuery();
-			event.getPlayer().sendMessage("Your TigerClan ID is " + rs.getInt("id"));
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM Players");
+			while (rs.next()) {
+				event.getPlayer().sendMessage("Your TigerClan ID is " + rs.getInt("id"));
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.severe("EXCEPTION "+e.getMessage());
