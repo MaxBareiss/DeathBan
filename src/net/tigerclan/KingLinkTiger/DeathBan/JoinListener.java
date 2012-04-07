@@ -59,7 +59,7 @@ public class JoinListener implements Listener{
 			// TODO Auto-generated catch block
 			log.severe("EXCEPTION "+e.getMessage());
 		}
-		//event.getPlayer().sendMessage("You have " + numlives + "lives left");
+		//event.getPlayer().sendMessage("You have " + numlives + " lives left");
 		//Test comment
 		
 		
