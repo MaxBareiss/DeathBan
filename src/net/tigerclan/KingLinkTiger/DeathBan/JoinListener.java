@@ -60,6 +60,7 @@ public class JoinListener implements Listener{
 			log.severe("EXCEPTION "+e.getMessage());
 		}
 		event.getPlayer().sendMessage("You have " + numlives + "lives left");
+		//Test comment
 		
 		
 	}
