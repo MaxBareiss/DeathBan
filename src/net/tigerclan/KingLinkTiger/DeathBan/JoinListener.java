@@ -41,8 +41,8 @@ public class JoinListener implements Listener{
 			//Shit goes here
 		} else {
 		}
-		int numlives = 3;
-		event.getPlayer();
+		//int numlives = 3;
+		//event.getPlayer();
 		//Player player = (Player)event.getEntity()	
 		//Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + player.getName()); 
 		PreparedStatement ps;
@@ -59,7 +59,7 @@ public class JoinListener implements Listener{
 			// TODO Auto-generated catch block
 			log.severe("EXCEPTION "+e.getMessage());
 		}
-		event.getPlayer().sendMessage("You have " + numlives + "lives left");
+		//event.getPlayer().sendMessage("You have " + numlives + "lives left");
 		//Test comment
 		
 		
