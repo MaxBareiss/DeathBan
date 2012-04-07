@@ -2,7 +2,7 @@ package net.tigerclan.KingLinkTiger.DeathBan;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -50,15 +50,15 @@ public class JoinListener implements Listener{
 		try {
 			Statement stmt = null;
 			ResultSet rs = null;
-			PreparedStatement ps;
+			//PreparedStatement ps;
 			//ps = connection.prepareStatement("SELECT COUNT(*) FROM Deaths WHERE id = (SELECT id FROM Players WHERE username="+event.getPlayer().getDisplayName()+")");
 			
 			//ResultSet rs = ps.executeQuery();
 			//log.info(new Integer(rs.getInt(0)).toString());
-			ps = connection.prepareStatement("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
+			//ps = connection.prepareStatement("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
 			log.info("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM Players");
+			rs = stmt.executeQuery("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
 			while (rs.next()) {
 				event.getPlayer().sendMessage("Your TigerClan ID is " + rs.getInt("id"));
 			}
