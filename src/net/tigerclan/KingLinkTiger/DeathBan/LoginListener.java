@@ -60,7 +60,7 @@ public class LoginListener implements Listener {
 			todaysunix = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(""+month+"/"+day+"/"+year+" 00:00:00").getTime();
 			todaysunix = todaysunix/1000;
 		} catch (ParseException e) {
-			e.printStackTrace();
+			log.severe(e.getMessage());
 		}
 		
 			Statement stmt4 = null;

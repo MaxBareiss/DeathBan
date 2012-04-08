@@ -35,7 +35,7 @@ public class JoinListener implements Listener{
 			Class.forName("com.mysql.jdbc.Driver");
  
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			log.severe(e.toString());
 			return;
 		}
 		Connection connection = null;
