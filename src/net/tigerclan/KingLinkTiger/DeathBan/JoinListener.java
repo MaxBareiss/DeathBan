@@ -1,3 +1,6 @@
+//This should possibly be replaced with the PlayerPreLoginEvent that way the actual login time may increase and this check would happen during the connection stage
+//TODO Replace this with the PlayerPreLoginEvent
+//TODO Rewrite this for optimization
 package net.tigerclan.KingLinkTiger.DeathBan;
 
 import java.sql.Connection;
