@@ -15,7 +15,12 @@ import org.bukkit.event.Listener;
 //import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+
 public class JoinListener implements Listener{
+	
+	/* Starting some derpy global Variables */
+	long timestamp = (System.currentTimeMillis()/1000);
+	
 	Logger log;
 	JoinListener(Logger _log){
 		log = _log;
@@ -50,6 +55,7 @@ public class JoinListener implements Listener{
 		try {
 			Statement stmt = null;
 			ResultSet rs = null;
+			ResultSet rs2 = null;
 			//PreparedStatement ps;
 			//ps = connection.prepareStatement("SELECT COUNT(*) FROM Deaths WHERE id = (SELECT id FROM Players WHERE username="+event.getPlayer().getDisplayName()+")");
 			
@@ -59,8 +65,23 @@ public class JoinListener implements Listener{
 			log.info("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
-			while (rs.next()) {
-				event.getPlayer().sendMessage("Your TigerClan ID is " + rs.getInt("id"));
+			
+			rs.last();//Go to the last record
+			int rowCount = rs.getRow();//Get the number of the last record
+			
+			
+			if(rowCount == 0){ //If the user is not in the player table
+				//Run query to add user to the table
+				stmt.execute("INSERT INTO `TigerClan_Community_Minecraft_Factions`.`Players` (`id`, `username`, `deaths`, `kills`, `lastseen`, `lastdeath`) VALUES (NULL, '"+event.getPlayer().getDisplayName()+"', '0', '0', '"+timestamp+"', NULL)");
+				//Welcome the player to the server?
+				event.getPlayer().sendMessage("Welcome to the TigerClan Factions Server");
+			}else{//The player is already in the table and display their ID
+				
+				//I added this query here because the rs.last I added above may mess this up, it may not.
+				rs2 = stmt.executeQuery("SELECT id FROM TigerClan_Community_Minecraft_Factions.Players WHERE username=\""+event.getPlayer().getDisplayName()+"\"");
+				while (rs2.next()) {
+					event.getPlayer().sendMessage("Your TigerClan ID is " + rs2.getInt("id"));
+				}
 			}
 			
 		} catch (SQLException e) {
